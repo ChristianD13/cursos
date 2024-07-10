@@ -1,0 +1,54 @@
+<html>
+    <header>
+
+ 
+   </header>
+<body>
+    <style>
+        h2{
+            color: green;
+        }
+    </style>
+    <h2>helloooo</h2>
+    <template>
+        <h2>hola gokuuuu</h2>
+    </template>
+    <goku-son></goku-son>
+</body>
+    <script>
+     
+        class myElement extends HTMLElement{
+            constructor(){
+                super();
+                this.attachShadow({mode: 'open'});
+            }
+            getTemplate(){
+                const template = document.createElement('template');
+                template.innerHTML =  ` 
+                <section>
+                    <h2>no dormir</h2>
+                    <div></div>
+                    </section>
+                    ${this.getStyles()}
+                `;
+                return template;
+            }
+            getStyles(){
+                return`
+                <style>
+                h2{
+                    color: red;
+                }
+                </style>
+                `;
+            }
+            render(){
+                this.shadowRoot.appendChild(this.getTemplate().content.cloneNode (true))
+            }
+            connectedCallback(){
+                this.render();
+            }
+        }
+        customElements.define('goku-son', myElement);
+    </script>
+</html>

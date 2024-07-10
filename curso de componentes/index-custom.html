@@ -1,0 +1,40 @@
+<html>
+    <header>
+
+ 
+   </header>
+<body>
+    <goku-son></goku-son>
+</body>
+    <script>
+        const template = document.createElement('div');
+        template.innerHTML = `
+        <style>
+        h1{
+        color: blue;
+        }
+        p{
+        color: red;
+        font-size: 24px;
+        }    
+        </style>
+        <h1>super sayayin</h1>
+        <p>fase 2</p>
+        `
+
+        class myElement extends HTMLElement{
+            constructor(){
+                super();
+
+                this.p = document.createElement('p');
+                console.log('hola soy goku');
+            }
+            connectedCallback(){
+                this.p.textContent = "hola gohan";
+                this.appendChild(this.p);
+                this.appendChild(template);
+            }
+        }
+        customElements.define('goku-son', myElement);
+    </script>
+</html>

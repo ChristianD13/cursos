@@ -1,0 +1,29 @@
+<html>
+    <header>
+
+ 
+   </header>
+<body>
+
+    <h2>helloooo</h2>
+    <goku-son></goku-son>
+</body>
+    <script>
+     
+        class myElement extends HTMLElement{
+            constructor(){
+                super();
+                console.log("holaa soy kokuuu");
+
+            }
+            connectedCallback(){
+                console.log("hola goku");
+            }
+            disconnectedCallback(){
+                console.log("bye bye");
+            }
+        }
+        customElements.define('goku-son', myElement);
+        document.querySelector("goku-son").remove();
+    </script>
+</html>

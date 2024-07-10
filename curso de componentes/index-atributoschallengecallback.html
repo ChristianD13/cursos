@@ -1,0 +1,65 @@
+<html>
+    <header>
+
+ 
+   </header>
+<body>
+
+    <h2>helloooo</h2>
+    <goku-son title="holaaac genteee!!" parrafo="soy el mas perron!!!" img="https://media.aws.alkomprar.com/ymarketingcolcomercio/Kalley/Home/klley-home-cate-pequenos-2023.webp">
+    </goku-son>
+</body>
+    <script>
+     
+        class myElement extends HTMLElement{
+            constructor(){
+                super();
+                this.attachShadow({mode: 'open'});
+
+            }
+            static get observedAttributes(){
+                return ['title','parrafo','img'];
+            }
+            attributeChangedCallback(actual, oldVal, newVal){
+                if ( actual ==="title"){
+                    this.title = newVal;
+                }
+                if ( actual ==="parrafo"){
+                    this.parrafo = newVal;
+                }
+                if ( actual ==="img"){
+                    this.img = newVal;
+                }
+            }
+            getTemplate(){
+                const template = document.createElement('template');
+                template.innerHTML =  ` 
+                    <section>
+                    <h2>${this.title}
+                    </h2>
+                    <p>${this.parrafo}</p>
+                    <img src=${this.img}>
+                    </section>
+                    ${this.getStyles()}
+                `;
+                return template;
+            }
+            getStyles(){
+                return`
+                <style>
+                h2{
+                    color: red;
+                }
+                </style>
+                `;
+            }
+            render(){
+                this.shadowRoot.appendChild(this.getTemplate().content.cloneNode (true))
+            }
+            connectedCallback(){
+                this.render();
+            }
+        }
+        customElements.define('goku-son', myElement);
+    </script>
+</html>

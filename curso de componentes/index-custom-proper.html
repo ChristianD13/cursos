@@ -1,0 +1,80 @@
+<html>
+    <header>
+
+ 
+   </header>
+<body>
+<style>
+    goku-son{
+        --primary-color: black;
+    }
+    .gohan{
+        --primary-color: orange;
+    }
+</style>
+    <h2>helloooo</h2>
+    <goku-son>
+        <span slot="titulo">hora</span>
+        <span slot="parrafo">de dormir</span>
+        <span class="yep" slot="parrafo">jamas</span>
+    </goku-son>
+    <goku-son class="gohan">
+        <span slot="titulo">hora</span>
+        <span slot="parrafo">de dormir</span>
+        <span class="yep" slot="parrafo">jamas</span>
+    </goku-son>
+</body>
+    <script>
+     
+        class myElement extends HTMLElement{
+            constructor(){
+                super();
+                this.attachShadow({mode: 'open'});
+            }
+            getTemplate(){
+                const template = document.createElement('template');
+                template.innerHTML =  ` 
+                    <section>
+                    <h2>
+                    <slot name="titulo"></slot>    
+                    </h2>
+                    <p>
+                    <slot name="parrafo"></slot>
+                    </p>
+                    </section>
+                    ${this.getStyles()}
+                `;
+                return template;
+            }
+            getStyles(){
+                return`
+                <style>
+                :host{
+                --primary-color: red;
+                --secondary-color: blue;
+                --title-one: 30px;
+                --title-two: 20px;
+                }
+                ::slotted(span){
+                font-size: 30px;
+                }
+                ::slotted(.yep){
+                color: red;
+                }
+                h2{
+                color: var(--primary-color);
+                font-size: var(--title-two);
+                }
+                </style>
+                `;
+            }
+            render(){
+                this.shadowRoot.appendChild(this.getTemplate().content.cloneNode (true))
+            }
+            connectedCallback(){
+                this.render();
+            }
+        }
+        customElements.define('goku-son', myElement);
+    </script>
+</html>
